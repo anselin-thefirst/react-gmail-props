@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import initialEmails from './data/emails'
 import Emails from './components/Emails'
+import EmailView from './components/EmailView'
 
 import './styles/App.css'
 
@@ -14,6 +15,7 @@ function App() {
   const [hideRead, setHideRead] = useState(false)
   const [currentTab, setCurrentTab] = useState('inbox')
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedEmail, setSelectedEmail] = useState(null)
 
   const unreadEmails = emails.filter(email => !email.read)
   const starredEmails = emails.filter(email => email.starred)
@@ -50,6 +52,14 @@ function App() {
   filteredEmails = filteredEmails.filter(email =>
     email.title.toLowerCase().includes(searchQuery)
   )
+
+  const showEmail = (email) => {
+    setSelectedEmail(email)
+  }
+
+  const goBack = () => {
+    setSelectedEmail(null)
+  }
 
   return (
     <div className="app">
@@ -97,10 +107,15 @@ function App() {
           </li>
         </ul>
       </nav>
+      {selectedEmail ? (
+        <EmailView email={selectedEmail} goBack={goBack} />
+      ) : (
         <Emails 
         filteredEmails={filteredEmails}
         toggleRead={toggleRead}
-        toggleStar={toggleStar}/>
+        toggleStar={toggleStar}
+        showEmail={showEmail}/>
+      )}
     </div>
   )
 }

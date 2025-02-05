@@ -2,13 +2,15 @@
 import Email from './Email';
 
 function Emails(props) {
-    const {filteredEmails, toggleRead, toggleStar} = props;
+    const {filteredEmails, toggleRead, toggleStar, showEmail} = props;
 
     return (
         <main className="emails">
             <ul>
           {filteredEmails.map((email, index) => (
-            <Email key={index} email={email} toggleRead={toggleRead} toggleStar={toggleStar} />
+            <li key={index} onClick={() => showEmail(email)}>
+                <Email email={email} toggleRead={toggleRead} toggleStar={toggleStar} />
+            </li>
           ))}
         </ul>
         </main>
