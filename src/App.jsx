@@ -88,11 +88,10 @@ function App() {
           </li>
         </ul>
       </nav>
-      <main className="emails">
-        <Emails emails={filteredEmails}
+        <Emails 
+        filteredEmails={filteredEmails}
         toggleRead={toggleRead}
         toggleStar={toggleStar}/>
-      </main>
     </div>
   )
 }

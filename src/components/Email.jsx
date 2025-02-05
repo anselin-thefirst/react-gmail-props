@@ -1,4 +1,6 @@
-function Email({email, toggleRead, toggleStar}) {
+function Email(props) {
+    const {email, toggleRead, toggleStar} = props;
+    
     return (
         <li
               // key={index}
